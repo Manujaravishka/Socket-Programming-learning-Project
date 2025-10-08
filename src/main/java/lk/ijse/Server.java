@@ -1,10 +1,11 @@
 package lk.ijse;
 
-import javax.imageio.IIOException;
 import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.Scanner;
 
 public class Server {
     public static void main(String[] args) {
@@ -19,6 +20,14 @@ public class Server {
 
             String message = dataInputStream.readUTF();
             System.out.println("Client :"+message);
+
+
+            Scanner scanner = new Scanner(System.in);
+            String msg = scanner.nextLine();
+            DataOutputStream dataOutputStream = new DataOutputStream(localSocket.getOutputStream());
+            dataOutputStream.writeUTF(msg);
+            dataOutputStream.flush();
+
 
             localSocket.close();
 
